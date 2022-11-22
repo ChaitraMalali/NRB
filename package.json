@@ -2,9 +2,10 @@
   "name": "nrb",
   "version": "1.0.0",
   "description": "",
-  "main": "App.js",
+  
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   },
   "repository": {
     "type": "git",
