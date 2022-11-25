@@ -3,3 +3,36 @@
     font-size: large;
     color: blueviolet;
 }
+
+#titleh2{
+    font-size: medium;
+    color: red;
+}
+
+#titleh3{
+    font-size: medium;
+    color: darkgoldenrod;
+}
+
+.searchBar input {
+    border-radius: 20px;
+    border: 1px solid #cae4cd;
+    padding: 1.8rem 2rem;
+    width: 30vw;
+    font-size: 1.6rem;
+  }
+
+  .header {
+    margin: 3rem 1rem;
+    padding: 2rem 5rem;
+    font-weight: 700;
+    font-size: 3.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 50px;
+  }
+
+
+
