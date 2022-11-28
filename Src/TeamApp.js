@@ -1,7 +1,7 @@
 import React from "react";
 import  ReactDOM  from "react-dom/client";
-import CardComponent from "./CardComponent.js";
-import TeamComponent from "./TeamComponent.js";
+import CardComponent from "./Components/CardComponent.js";
+import TeamComponent from "./Components/TeamComponent.js";
 
 const title = "TEAM AVENGERS"
 
