@@ -42,8 +42,8 @@ const SearchLogo = () => {
     )
   };
 
-const root = ReactDOM.createRoot(document.getElementById("search"));
-root.render(<Header/>);
+// const root = ReactDOM.createRoot(document.getElementById("search"));
+// root.render(<Header/>);
 
 
 

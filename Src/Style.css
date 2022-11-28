@@ -1,12 +1,9 @@
-#title{
-    
-    font-size: large;
-    color: blueviolet;
-}
 
 #titleh2{
     font-size: medium;
     color: red;
+    text-align: center;
+    font-style: italic;
 }
 
 #titleh3{
@@ -22,17 +19,36 @@
     font-size: 1.6rem;
   }
 
-  .header {
-    margin: 3rem 1rem;
-    padding: 2rem 5rem;
-    font-weight: 700;
-    font-size: 3.6rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
-    border-radius: 50px;
+  .title-class{
+    font-size: 3em;
+    color: black;
+    font-style: italic;
+    text-align: center;
   }
 
+  .card-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+
+  .card {
+    border: 1px solid black;
+    padding: 10px;
+    width: 100px;
+    flex: 15%;
+    margin: 5px;
+    text-align: center;
+}
+
+  .card>img {
+    width: 200px;
+    height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
 
 

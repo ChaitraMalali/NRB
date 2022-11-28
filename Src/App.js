@@ -20,8 +20,8 @@
          [React.createElement("h2", {id: "titleh2"}, "in 3 months")],
          [React.createElement("h3", {id: "titleh3"}, "zero to hero!")]);        
 
-        const rootone = ReactDOM.createRoot(document.getElementById("rootReact"));
-        rootone.render(heading);
+       //  const rootone = ReactDOM.createRoot(document.getElementById("rootReact"));
+       //  rootone.render(heading);
 
         //Creating using JSX functional components !!
         const TitleComponent = () => <h2> Learn React</h2>
@@ -39,5 +39,5 @@
               )
         }
 
-        const rootJsx = ReactDOM.createRoot(document.getElementById("rootJsx"));
-        rootJsx.render(<JSXComponent/>);
+       //  const rootJsx = ReactDOM.createRoot(document.getElementById("rootJsx"));
+       //  rootJsx.render(<JSXComponent/>);
