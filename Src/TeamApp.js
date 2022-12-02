@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import  ReactDOM  from "react-dom/client";
 import CardComponent from "./Components/CardComponent.js";
 import TeamComponent from "./Components/TeamComponent.js";
+import { title } from "./constants.js";
+import SearchBarComponent from "./Components/SearchBarComponent.js";
+import { useState } from "react";
 
-const title = "TEAM AVENGERS"
 
 const HeadingComponent = () =>
 {
@@ -15,21 +17,19 @@ const HeadingComponent = () =>
 }
 
 
-const CardContainer = () => {
-  
-    const cards = TeamComponent.map((teamMember) => {
-        return <CardComponent teamMember = {teamMember} key ={teamMember.id} />
-    });
-    
-   return cards;
-
-}
+const CardContainer = ({filteredTeamMembers }) =>  
+     filteredTeamMembers.map(teamMember => (
+     <CardComponent teamMember = {teamMember} key ={teamMember.id} />
+     ));
 
 const BodyComponent = () => { 
-
+    debugger;     
+     const [filteredTeamMembers , setFilteredTeamMembers] = useState(TeamComponent);
+    
     return(
-        <div id="card-container" className="card-container">
-        <CardContainer/>
+        <div id="card-container" className="card-container">  
+        <SearchBarComponent setFilteredTeamMembers = { setFilteredTeamMembers }/>    
+        <CardContainer filteredTeamMembers = { filteredTeamMembers } />
     </div>
     );
 }
@@ -44,7 +44,5 @@ const AppLayout = () =>
     );
  }
 const root = ReactDOM.createRoot(document.getElementById("root"));
-// console.log(AppLayout());
-// console.log(<AppLayout/>);
+
 root.render(AppLayout());
-// root.render(<AppLayout/>);
