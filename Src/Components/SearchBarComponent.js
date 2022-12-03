@@ -3,7 +3,7 @@ import TeamComponent from "./TeamComponent.js";
 
 const SearchTeamMember =(searchText) =>
 {
-    return TeamComponent[1];
+    return TeamComponent.filter((team) => team.name.includes(searchText));
 }
 
 const SearchBarComponent = ({ setFilteredTeamMembers }) =>
@@ -13,7 +13,6 @@ const SearchBarComponent = ({ setFilteredTeamMembers }) =>
     return(
     <div className="search-bar">
     <form onSubmit={(e) =>{
-        alert("onSubmit");
       e.preventDefault(); //The preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur.
       const filteredTeamMembers =  SearchTeamMember(searchText); 
       setFilteredTeamMembers(filteredTeamMembers);    
