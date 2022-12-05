@@ -6,16 +6,16 @@ const SearchTeamMember =(searchText) =>
     return TeamComponent.filter((team) => team.name.includes(searchText));
 }
 
+
 const SearchBarComponent = ({ setFilteredTeamMembers }) =>
 {
-    debugger;
-    const [searchText,SetSearchText] = useState("");   
+    const [searchText,SetSearchText] = useState(""); 
     return(
     <div className="search-bar">
     <form onSubmit={(e) =>{
       e.preventDefault(); //The preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur.
       const filteredTeamMembers =  SearchTeamMember(searchText); 
-      setFilteredTeamMembers(filteredTeamMembers);    
+      setFilteredTeamMembers(filteredTeamMembers); 
     }
     }>
     <input id="teamname" placeholder="Team Member"
@@ -24,7 +24,7 @@ const SearchBarComponent = ({ setFilteredTeamMembers }) =>
             SetSearchText(e.target.value);
         }
      }></input>
-    <h1>{searchText}</h1>
+   
     <button>Search</button>
     </form>
    </div>  
