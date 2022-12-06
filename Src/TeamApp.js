@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+
 import  ReactDOM  from "react-dom/client";
 import CardComponent from "./Components/CardComponent.js";
 import TeamComponent from "./Components/TeamComponent.js";
 import { title } from "./constants.js";
 import SearchBarComponent from "./Components/SearchBarComponent.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import NoResultsComponent from "./Components/NoResultsComponent.js";
+import  getGitHubData  from "./apiServices/gitHubUserService.js";
 
 
 const HeadingComponent = () =>
@@ -16,20 +18,41 @@ const HeadingComponent = () =>
     );
 }
 
+const CardContainer = ({filteredTeamMembers }) => 
+{
+    if(!filteredTeamMembers.length) return <NoResultsComponent/>
 
-const CardContainer = ({filteredTeamMembers }) =>  
-     filteredTeamMembers.map(teamMember => (
-     <CardComponent teamMember = {teamMember} key ={teamMember.id} />
-     ));
-
-const BodyComponent = () => { 
-    debugger;     
-     const [filteredTeamMembers , setFilteredTeamMembers] = useState(TeamComponent);
+    else{
+        const cards = filteredTeamMembers && filteredTeamMembers.map(teamMember => (  //Checks for empty array
+            <CardComponent teamMember = {teamMember} key ={teamMember.id} />
+        ));
+            return cards;
+    }  
     
+}
+
+const BodyComponent = () => {  
+    const [listOfTeammembers, SetListOfTeamMembers] = useState([]);
+    const [filteredTeamMembers, setFilteredTeamMembers] =  useState([]);   
+
+     useEffect(() =>{
+      getData ();
+     },[])   
+
+     async function getData() {
+
+        const userNames = ["ap221882", "ChaitraMalali", "roshantrivedi","laxmi20936","balajigaikwad","vijeshnk"];
+        let data = await (await getGitHubData(userNames));
+        SetListOfTeamMembers(data);
+        setFilteredTeamMembers(data);
+
+     }
+
     return(
         <div id="card-container" className="card-container">  
-        <SearchBarComponent setFilteredTeamMembers = { setFilteredTeamMembers }/>    
-        <CardContainer filteredTeamMembers = { filteredTeamMembers } />
+        <SearchBarComponent listOfTeammembers = { listOfTeammembers } 
+        setFilteredTeamMembers = { setFilteredTeamMembers }/>    
+        <CardContainer filteredTeamMembers = { filteredTeamMembers.length ? filteredTeamMembers : <NoResultsComponent/> } />
     </div>
     );
 }

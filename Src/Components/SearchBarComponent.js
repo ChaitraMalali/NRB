@@ -1,20 +1,20 @@
 import { useState } from "react";
 import TeamComponent from "./TeamComponent.js";
 
-const SearchTeamMember =(searchText) =>
+const SearchTeamMember =(searchText, listOfTeammembers) =>
 {
-    return TeamComponent.filter((team) => team.name.includes(searchText));
+    return listOfTeammembers.filter((team) => team.login.includes(searchText));
 }
 
 
-const SearchBarComponent = ({ setFilteredTeamMembers }) =>
+const SearchBarComponent = ({ listOfTeammembers,setFilteredTeamMembers }) =>
 {
     const [searchText,SetSearchText] = useState(""); 
     return(
     <div className="search-bar">
     <form onSubmit={(e) =>{
       e.preventDefault(); //The preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur.
-      const filteredTeamMembers =  SearchTeamMember(searchText); 
+      const filteredTeamMembers =  SearchTeamMember(searchText,listOfTeammembers); 
       setFilteredTeamMembers(filteredTeamMembers); 
     }
     }>

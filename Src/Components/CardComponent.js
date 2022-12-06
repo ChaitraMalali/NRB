@@ -1,14 +1,16 @@
 
 const CardComponent = (props) =>
 {   const teamMember = props.teamMember;
-    const {img,name,place,company,designation} = teamMember;
+    //const {img,name,place,company,designation} = teamMember;
+    //console.log(teamMember.login);
+    const {login, id,avatar_url} = teamMember;
     return(
         <div id ="card" className="card">
-         <img src={img}></img>
-        <h2>{name}</h2>
-        <h3>{place}</h3>          
-        <h4>{company}</h4>
-        <h5>{designation}</h5>
+          <img src={avatar_url}></img> 
+        <h2>{login}</h2>
+        <h3>{id}</h3>          
+        {/* <h4>{company}</h4>
+        <h5>{designation}</h5> */}
         </div>
        
     )
