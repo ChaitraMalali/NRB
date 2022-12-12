@@ -1,12 +1,16 @@
 
 import  ReactDOM  from "react-dom/client";
+import { useState, useEffect } from "react";
+import {createBrowserRouter,Link,Outlet,RouterProvider} from "react-router-dom";
 import CardComponent from "./Components/CardComponent.js";
 import TeamComponent from "./Components/TeamComponent.js";
-import { title } from "./constants.js";
+import { title } from "./Utils/constants.js";
 import SearchBarComponent from "./Components/SearchBarComponent.js";
-import { useState, useEffect } from "react";
 import NoResultsComponent from "./Components/NoResultsComponent.js";
-import  getGitHubData  from "./apiServices/gitHubUserService.js";
+import getGitHubData  from "./apiServices/gitHubUserService.js";
+import ErrorComponent from "./Components/ErrorComponent.js";
+import TeamMemberComponent from "./Components/TeamMemberComponent.js";
+
 
 
 const HeadingComponent = () =>
@@ -21,12 +25,13 @@ const HeadingComponent = () =>
 const CardContainer = ({filteredTeamMembers }) => 
 {
     if(!filteredTeamMembers.length) return <NoResultsComponent/>
-
     else{
-        const cards = filteredTeamMembers && filteredTeamMembers.map(teamMember => (  //Checks for empty array
-            <CardComponent teamMember = {teamMember} key ={teamMember.id} />
+        const cards = filteredTeamMembers && filteredTeamMembers.map(teamMember => ( //Checks for empty array
+             <Link to = {`/teammember/${teamMember.login}`} >
+            <CardComponent teamMember = {teamMember} key ={teamMember.login} />
+             </Link>
         ));
-            return cards;
+           return cards;
     }  
     
 }
@@ -62,10 +67,32 @@ const AppLayout = () =>
     return(  
     <>
     <HeadingComponent/>
-    <BodyComponent/>
+    <Outlet/>   
     </>
     );
- }
-const root = ReactDOM.createRoot(document.getElementById("root"));
+}
 
-root.render(AppLayout());
+ const appRouter = createBrowserRouter([
+    {
+        path :"/",
+        element:<AppLayout/>,
+        errorElement :<ErrorComponent/>,
+        children : [
+            {
+                path :"/teamMember/:id",
+                element:<TeamMemberComponent/>,
+                errorElement :<ErrorComponent/> 
+            },
+            {
+                path: "/search",
+                element: <BodyComponent/>,
+                errorElement: <ErrorComponent/>
+            }
+        ]
+    }
+ ]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<RouterProvider router = {appRouter}/>)
+
+//root.render(AppLayout());

@@ -1,6 +1,7 @@
 
 const CardComponent = (props) =>
 {   const teamMember = props.teamMember;
+    console.log (teamMember.id);
     //const {img,name,place,company,designation} = teamMember;
     //console.log(teamMember.login);
     const {login, id,avatar_url} = teamMember;
