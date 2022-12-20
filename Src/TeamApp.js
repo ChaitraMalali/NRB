@@ -1,95 +1,44 @@
 import ReactDOM from "react-dom/client";
-import { useState, useEffect } from "react";
 import {
   createBrowserRouter,
   Link,
   Outlet,
   RouterProvider,
 } from "react-router-dom";
-import CardComponent from "./Components/CardComponent.js";
-import TeamComponent from "./Components/TeamComponent.js";
 import { title } from "./Utils/constants.js";
-import SearchBarComponent from "./Components/SearchBarComponent.js";
-import NoResultsComponent from "./Components/NoResultsComponent.js";
-import getGitHubData from "./apiServices/gitHubUserService.js";
 import ErrorComponent from "./Components/ErrorComponent.js";
 import TeamMemberComponent from "./Components/TeamMemberComponent.js";
-import AboutUsComponent from "./Components/AboutUsComponent.js";
-import ProfileComponent from "./Components/ProfileComponent.js";
+import SearchPageComponent from "./Components/SearchPageComponent.js";
+import { lazy, Suspense, useContext, useState } from "react";
+import ThemeContext from "./Components/ThemeContext.js";
+
+
+const AboutUsComponent = lazy(() => import("./Components/AboutUsComponent.js"));
+const ProfileComponent = lazy(() => import("./Components/ProfileComponent.js"));
 
 const HeadingComponent = () => {
+    const{theme,setTheme} = useContext(ThemeContext);
   return (
-    <div id="title" className="title-class" tabIndex="1">
+    <div id="title" className="title-class" tabIndex="1" style={{
+        backgroundColor : theme === "light"? "#fff" : "#000"
+    }}>
       <h2>{title}</h2>
+      <Link to = "/search"><span>Search Here</span></Link>
+      <span></span>
+      <Link to = "/aboutus"><span>AboutUs</span></Link>
+      <button onClick={()=> setTheme(theme === "dark"? "light" : "dark")}>ThemeMode : {theme}</button>
     </div>
   );
 };
 
-const CardContainer = ({ filteredTeamMembers }) => {
-  if (!filteredTeamMembers.length) return <NoResultsComponent />;
-  else {
-    const cards =
-      filteredTeamMembers &&
-      filteredTeamMembers.map(
-        (
-          teamMember //Checks for empty array
-        ) => (
-          <Link to={`/teammember/${teamMember.login}`}>
-            <CardComponent teamMember={teamMember} key={teamMember.login} />
-          </Link>
-        )
-      );
-    return cards;
-  }
-};
-
-const BodyComponent = () => {
-  const [listOfTeammembers, SetListOfTeamMembers] = useState([]);
-  const [filteredTeamMembers, setFilteredTeamMembers] = useState([]);
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  async function getData() {
-    const userNames = [
-      "ap221882",
-      "ChaitraMalali",
-      "roshantrivedi",
-      "laxmi20936",
-      "balajigaikwad",
-      "vijeshnk",
-    ];
-    let data = await await getGitHubData(userNames);
-    SetListOfTeamMembers(data);
-    setFilteredTeamMembers(data);
-  }
-
+const AppLayout = () => { 
+const[theme, setTheme] = useState("light");
   return (
-    <div id="card-container" className="card-container">
-      <SearchBarComponent
-        listOfTeammembers={listOfTeammembers}
-        setFilteredTeamMembers={setFilteredTeamMembers}
-      />
-      <CardContainer
-        filteredTeamMembers={
-          filteredTeamMembers.length ? (
-            filteredTeamMembers
-          ) : (
-            <NoResultsComponent />
-          )
-        }
-      />
-    </div>
-  );
-};
-
-const AppLayout = () => {
-  return (
-    <>
+    <ThemeContext.Provider value={ {theme: theme, setTheme : setTheme}}>
       <HeadingComponent />
       <Outlet />
-    </>
+    </ThemeContext.Provider>
+   
   );
 };
 
@@ -106,17 +55,17 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <BodyComponent />,
+        element: <SearchPageComponent />,
         errorElement: <ErrorComponent />,
       },
       {
         path: "/aboutus",
-        element: <AboutUsComponent />,
+        element: <Suspense><AboutUsComponent/></Suspense>,
         errorElement: <ErrorComponent />,
         children: [
           {
              path: "profile",
-             element: <ProfileComponent name = {"Chaitra J"}/>,
+             element: <Suspense><ProfileComponent name = {"Chaitra J"}/></Suspense>,
              errorElement: <ErrorComponent />,
           },
         ],

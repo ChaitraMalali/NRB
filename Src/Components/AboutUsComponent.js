@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 class AboutUsComponent extends React.Component {
 
@@ -16,6 +16,7 @@ class AboutUsComponent extends React.Component {
         return (
                     <>
                     <h3>This is a kool Git users website information page !!!</h3>
+                    <Link to = "/aboutus/profile"> Profile </Link>
                     <Outlet/>
                     </>
                 )
