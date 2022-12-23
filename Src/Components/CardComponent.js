@@ -10,14 +10,11 @@ const CardComponent = (props) =>
     const {login, id,avatar_url} = teamMember;
     const {theme , setTheme} = useContext(ThemeContext)
     return(
-        <div id ="card" className="card" style={{
-            backgroundColor : theme === "light"? "#fff" : "#000"
-        }}>
-        <img src={avatar_url}></img> 
-        <h2>{login}</h2>
-        <h3>{id}</h3>          
-        {/* <h4>{company}</h4>
-        <h5>{designation}</h5> */}
+ 
+        <div className= {`${theme === "light"?'bg-pink-100' : 'bg-blue-200'}`}>
+        <img className="h-40 m-5 border-spacing-1 rounded-lg pr-4" src={avatar_url}></img> 
+        <h2 className="text-gray-500 pl-6">{login}</h2>
+        <h3 className=" text-gray-500 pl-6">{id}</h3>          
         </div>
        
     )

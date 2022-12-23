@@ -48,22 +48,19 @@ const SearchPageComponent = () => {
     );
   };
 
-  const CardContainer = ({ filteredTeamMembers }) => {
-    if (!filteredTeamMembers.length) return <NoResultsComponent />;
-    else {
-      const cards =
+
+const CardContainer = ({ filteredTeamMembers }) =>  
+    !filteredTeamMembers.length? (<NoResultsComponent/>):(
+      <div className="flex flex-wrap">{
         filteredTeamMembers &&
-        filteredTeamMembers.map(
-          (
-            teamMember //Checks for empty array
-          ) => (
+        filteredTeamMembers.map((teamMember)=>(       
             <Link to={`/teammember/${teamMember.login}`}>
               <CardComponent teamMember={teamMember} key={teamMember.login} />
             </Link>
           )
-        );
-      return cards;
-    }
-  };
+        )
+      }
+      </div>  
+    );
 
   export default SearchPageComponent;

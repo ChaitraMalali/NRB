@@ -18,14 +18,14 @@ const SearchBarComponent = ({ listOfTeammembers,setFilteredTeamMembers }) =>
       setFilteredTeamMembers(filteredTeamMembers); 
     }
     }>
-    <input id="teamname" placeholder="Team Member"
+    <input className="border-gray-600" id="teamname" placeholder="TeamMemberSearch"
      onChange = {
         (e) => {
             SetSearchText(e.target.value);
         }
      }></input>
    
-    <button>Search</button>
+    <button className="bg-pink-300 rounded-xl m-5 overflow-hidden b">Search</button>
     </form>
    </div>  
    );

@@ -19,14 +19,17 @@ const ProfileComponent = lazy(() => import("./Components/ProfileComponent.js"));
 const HeadingComponent = () => {
     const{theme,setTheme} = useContext(ThemeContext);
   return (
-    <div id="title" className="title-class" tabIndex="1" style={{
-        backgroundColor : theme === "light"? "#fff" : "#000"
-    }}>
-      <h2>{title}</h2>
-      <Link to = "/search"><span>Search Here</span></Link>
+      <div id = "title" className= {`flex justify-between font-bold p-10 bg-pink-100 ${theme === "light"?'bg-pink-100' : 'bg-blue-200'}`} >
+      <h2 className = "flex text-3xl text-gray-500">{title}</h2>
+      <img className="w-60" src="https://res.infoq.com/articles/who-is-on-the-team/en/headerimage/who-is-on-the-team-header-1612952290708.jpg"></img>
+      <div>
+        <div className="flex justify-between space-x-2 text-gray-400">
+      <Link to = "/search"><span>SearchHere</span></Link>
       <span></span>
       <Link to = "/aboutus"><span>AboutUs</span></Link>
       <button onClick={()=> setTheme(theme === "dark"? "light" : "dark")}>ThemeMode : {theme}</button>
+        </div>
+      </div>
     </div>
   );
 };

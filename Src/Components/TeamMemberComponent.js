@@ -22,7 +22,7 @@ const TeamMemberComponent = () => {
 
     return (
         <>
-            <h2> TeamMember Data! </h2>
+            <h2 className="text-gray-500"> TeamMember Data! </h2>
             <CardComponent teamMember = { memberInfo }/>
         </>);
 }

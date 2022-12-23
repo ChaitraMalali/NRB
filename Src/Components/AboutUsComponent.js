@@ -14,11 +14,16 @@ class AboutUsComponent extends React.Component {
     render(){
         console.log("parent -AboutUs- render !!")
         return (
-                    <>
-                    <h3>This is a kool Git users website information page !!!</h3>
-                    <Link to = "/aboutus/profile"> Profile </Link>
+            <div>
+                    <div className="flex">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/31/11/59/information-1015297_1280.jpg" className="w-40"></img>
+                    <h3 className="text-gray-600 text-center text-lg">This is a kool Git users website information page !!!</h3>
+                    </div>
+                    <div>
+                    <Link className="font-bold text-gray-700 m-5 p-5" to = "/aboutus/profile"> Profile </Link>
                     <Outlet/>
-                    </>
+                    </div>
+             </div>
                 )
 
         }
